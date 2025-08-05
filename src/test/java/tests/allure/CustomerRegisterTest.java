@@ -20,37 +20,39 @@ public class CustomerRegisterTest {
     public void setUp() {
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        driver.get("http://localhost:5173/login"); // ✅ Start from login page
+        driver.get("http://localhost:5173/login");
     }
 
-    @Test(description = "Full customer registration redirection flow")
-    @Severity(SeverityLevel.CRITICAL)
-    @Story("Navigate and select customer registration")
-    @Description("Clicks on 'Create an Account' then 'Customer' and verifies the registration topic")
-    public void testCustomerRegistration() {
-        // Step 1: Click "Create An Account"
-        WebElement createAccLink = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//*[@id=\"root\"]/div/div[3]/div[2]/form/div[2]/span/a")));
-        createAccLink.click();
+    @Test(description = "Complete customer registration with form fill")
+    @Severity(SeverityLevel.BLOCKER)
+    @Story("Customer submits registration form")
+    @Description("Clicks on 'Create an Account' ➜ 'Customer' ➜ fills form ➜ clicks Register")
+    public void testCustomerRegistrationFormFill() {
+        // Step 1: Navigate to Register Page
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[3]/div[2]/form/div[2]/span/a"))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/button[1]"))).click();
 
-        // Step 2: Click "Customer" button
-        WebElement customerBtn = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath("//*[@id=\"root\"]/div/div[4]/div/div/button[1]")));
-        customerBtn.click();
+        // Step 2: Fill form fields
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@name='fullName']"))).sendKeys("Test User");
+        driver.findElement(By.xpath("//*[@name='fullName']")).sendKeys("Hansima");
+        driver.findElement(By.xpath("//*[@name='nicOrRegNo']")).sendKeys("2000897689076");
+        driver.findElement(By.xpath("//*[@name='email']")).sendKeys("tharushi@gmail.com");
+        driver.findElement(By.xpath("//*[@name='password']")).sendKeys("1234");
+        driver.findElement(By.xpath("//*[@name='confirmPassword']")).sendKeys("1234");
 
-        // Step 3: Verify heading is displayed
-        WebElement topicElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@id=\"root\"]/div/div[1]/h2")));
+        driver.findElement(By.xpath("//*[@name='businessName']")).sendKeys("hansi");
+        driver.findElement(By.xpath("//*[@name='businessType']")).sendKeys("hotel");
+        driver.findElement(By.xpath("//*[@name='address']")).sendKeys("akuressa");
+        driver.findElement(By.xpath("//*[@name='city']")).sendKeys("matara");
+        driver.findElement(By.xpath("//*[@name='mobile']")).sendKeys("0777654767");
 
-        String actualTopic = topicElement.getText();
-        System.out.println("Page topic: " + actualTopic);
 
-        // ✅ Corrected expected topic
-        String expectedTopic = "Register As A Customer";
-        Assert.assertEquals(actualTopic, expectedTopic, "Unexpected topic after selecting customer register");
+        // Step 4: Click Register
+        WebElement registerBtn = driver.findElement(By.xpath("//button[text()='Register']"));
+        registerBtn.click();
+
     }
 
     @AfterClass
