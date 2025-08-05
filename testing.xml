@@ -7,6 +7,7 @@
 <!--            <class name="tests.allure.RegisterTest"/>-->
             <class name="tests.allure.CustomerRegisterTest"/>
             <class name="tests.allure.officer.DashboardTest"/>
+            <class name="tests.allure.officer.BillManagementTest"/>
         </classes>
     </test>
 </suite>
