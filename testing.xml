@@ -4,7 +4,8 @@
     <test name="Login Tests">
         <classes>
             <class name="tests.allure.LoginTest"/>
-            <class name="tests.allure.RegisterTest"/>
+<!--            <class name="tests.allure.RegisterTest"/>-->
+            <class name="tests.allure.CustomerRegisterTest"/>
         </classes>
     </test>
 </suite>
