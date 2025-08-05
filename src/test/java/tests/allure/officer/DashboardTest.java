@@ -43,7 +43,6 @@ public class DashboardTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Dashboard content visibility on scroll")
     @Description("Scrolls down the dashboard and checks that bottom content is visible")
-
     public void testDashboardScroll() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -88,8 +87,6 @@ public class DashboardTest {
         wait.until(ExpectedConditions.urlContains("/responsibleOfficer/dashboard"));
         Assert.assertTrue(driver.getCurrentUrl().contains("/responsibleOfficer/dashboard"),
                 "Failed to navigate back to Dashboard page");
-
-
     }
 
     @Test(description = "Quick actions button2 navigates and scrolls")
@@ -124,12 +121,12 @@ public class DashboardTest {
         wait.until(ExpectedConditions.urlContains("/responsibleOfficer/dashboard"));
         Assert.assertTrue(driver.getCurrentUrl().contains("/responsibleOfficer/dashboard"),
                 "Failed to navigate back to Dashboard page");
-
     }
-    @Test(description = "Quick actions button2 navigates and scrolls")
+
+    @Test(description = "Quick actions button3 navigates and scrolls")
     @Severity(SeverityLevel.NORMAL)
     @Story("Quick actions button click and page scroll verification")
-    @Description("Click Quick Action button, navigate to Bill management, and scroll to section heading")
+    @Description("Click Quick Action button, navigate to Reports, and scroll to section heading")
     public void testQuickActionButton3() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));  // Increased wait time
 
@@ -151,7 +148,13 @@ public class DashboardTest {
         // Step 4: Scroll to the heading element
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", heading);
 
+        // Step 5: Navigate back to the dashboard
+        driver.navigate().back();  // This returns you back to the previous page, which should be the dashboard
 
+        // Optional: Verify that you're on the dashboard page
+        wait.until(ExpectedConditions.urlContains("/responsibleOfficer/dashboard"));
+        Assert.assertTrue(driver.getCurrentUrl().contains("/responsibleOfficer/dashboard"),
+                "Failed to navigate back to Dashboard page");
     }
 
     @AfterClass

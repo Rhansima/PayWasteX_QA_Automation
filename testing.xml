@@ -8,6 +8,7 @@
             <class name="tests.allure.CustomerRegisterTest"/>
             <class name="tests.allure.officer.DashboardTest"/>
             <class name="tests.allure.officer.BillManagementTest"/>
+            <class name="tests.allure.officer.DirectPaymentTest" />
         </classes>
     </test>
 </suite>
