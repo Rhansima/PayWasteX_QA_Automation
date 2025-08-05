@@ -3,9 +3,10 @@
 <suite name="PayWasteX Automation Suite" verbose="1" parallel="false">
     <test name="Login Tests">
         <classes>
-            <class name="tests.allure.LoginTest"/>
+            <class name="tests.allure.officer.LoginTest"/>
 <!--            <class name="tests.allure.RegisterTest"/>-->
             <class name="tests.allure.CustomerRegisterTest"/>
+            <class name="tests.allure.officer.DashboardTest"/>
         </classes>
     </test>
 </suite>
